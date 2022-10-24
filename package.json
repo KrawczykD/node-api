@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch-server-ts": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.js",
+    "watch-server": "nodemon ./index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.6.6",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.3",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.8.4"
+  }
+}
