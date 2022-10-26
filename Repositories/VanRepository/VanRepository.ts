@@ -1,21 +1,19 @@
-import { Connection, Model } from "mongoose";
 import IVan from "../../DatabaseModels/Van/IVan";
+import Van from '../../DatabaseModels/Van/Van';
 import IVanRepository from "../VanRepository/IVanRepository";
 
 export default class userRepository implements IVanRepository {
-    constructor(
-        public readonly van : Model<IVan>
-    ){}
+
     getVanByRegistrationNumber(registrationNumber: String) {
-        return this.van.find({registrationNumber:registrationNumber});
+        return Van.find({registrationNumber:registrationNumber});
     }
     getAllVans() {
-        return this.van.find();
+        return Van.find();
     }
 
     saveVan(newVan: IVan){
 
-        const newCreatedVan = new this.van<IVan>({
+        const newCreatedVan = new Van<IVan>({
             registrationNumber: newVan.registrationNumber,
             motDueDate: newVan.motDueDate,
             createAt: newVan.createAt,
