@@ -1,24 +1,20 @@
-import { connect , Connection, disconnect} from 'mongoose';
+import { connect , connection, disconnect} from 'mongoose';
 import IDatabaseRepository from './IDatabaseRepository';
 
-export default class DatabaseRepository implements IDatabaseRepository {
-    constructor(
-        public readonly _connection: Connection,
-        public readonly _connectionString: string,
-    ){
-    };
+// missing static intefface
+export default class DatabaseRepository {
     
-    
-    
-     initializeDB (){
-        this._connection.on('error', (error) => console.error(error));
-        this._connection.once('open', () => console.log('Connected to Database'));
+    private static readonly connectionString = "mongodb://localhost:27017/API";
 
-        return connect(this._connectionString);
+    public static initializeDB (){
+        connection.on('error', (error) => console.error(error));
+        connection.once('open', () => console.log('Connected to Database'));
+
+        return connect(this.connectionString);
     };
     
-    closeDB(){
-        this._connection.close();
+    public static closeDB(){
+        connection.close();
         console.log("Disconected from Database");
     };
 };
