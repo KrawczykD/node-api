@@ -13,26 +13,26 @@ import UoW from '../../Repositories/DriversRepository/UnityOfWork';
 router.get('/driver', async (req, res) => {
 
   try {
-    await databaseRepository.initializeDB();
-    const driverUoW = await new UoW(Driver);
+    await DatabaseRepository.initializeDB();
+    const driverUoW = await new UoW();
     res.json(await driverUoW.getAllDrivers() as Array<IDriver>);
   } catch (err) {
     res.status(400).json({ message: err.message })
   } finally{
-    databaseRepository.closeDB();
+    DatabaseRepository.closeDB();
   }
 })
 
 //get one by name
 router.get('/driver/:name', async (req, res) => {
   try {
-    await databaseRepository.initializeDB();
-    const driverUoW = await new UoW(Driver);
+    await DatabaseRepository.initializeDB();
+    const driverUoW = await new UoW();
     res.json(await driverUoW.getDriverByName(req.params.name) as Array<IDriver>);
   } catch (err) {
     res.status(400).json({ message: err.message })
   } finally{
-    databaseRepository.closeDB();
+    DatabaseRepository.closeDB();
   }
 })
 

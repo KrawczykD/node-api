@@ -13,26 +13,26 @@ import UoW from '../../Repositories/VanRepository/UnityOfWork';
 router.get('/van', async (req, res) => {
 
   try {
-    await databaseRepository.initializeDB();
-    const vanUoW = await new UoW(Van);
+    await DatabaseRepository.initializeDB();
+    const vanUoW = await new UoW();
     res.json(await vanUoW.getAllVans() as Array<IVan>);
   } catch (err) {
     res.status(400).json({ message: err.message })
   } finally{
-    databaseRepository.closeDB();
+    DatabaseRepository.closeDB();
   }
 })
 
 //get one by name
 router.get('/van/:registrationNumber', async (req, res) => {
   try {
-    await databaseRepository.initializeDB();
-    const vanUoW = await new UoW(Van);
+    await DatabaseRepository.initializeDB();
+    const vanUoW = await new UoW();
     res.json(await vanUoW.getVanByRegistrationNumber(req.params.registrationNumber) as Array<IVan>);
   } catch (err) {
     res.status(400).json({ message: err.message })
   } finally{
-    databaseRepository.closeDB();
+    DatabaseRepository.closeDB();
   }
 })
 
@@ -48,7 +48,7 @@ router.post('/van/create', async (req, res) => {
         driverId: req.query.driverId
     }
     try {
-      await databaseRepository.initializeDB();
+      await DatabaseRepository.initializeDB();
       
       res.status(201).json(await new Van(newVan).save());
     } catch (err) {
