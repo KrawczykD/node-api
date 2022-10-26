@@ -3,14 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 import DatabaseRepository from '../../Repositories/DatabaseRepository/DatabaseRepository';
-import {connection} from 'mongoose';
 
 import IVan from '../../DatabaseModels/Van/IVan';
 import Van from '../../DatabaseModels/Van/Van';
 
 import UoW from '../../Repositories/VanRepository/UnityOfWork';
-
-const databaseRepository = new DatabaseRepository(connection , "mongodb://localhost:27017/API");
 
 //get all
 router.get('/van', async (req, res) => {
@@ -57,7 +54,7 @@ router.post('/van/create', async (req, res) => {
     } catch (err) {
       res.status(400).json({ message: err.message })
     } finally {
-      databaseRepository.closeDB();
+      DatabaseRepository.closeDB();
     }
   })
   
