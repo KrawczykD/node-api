@@ -1,18 +1,12 @@
 import IVan from "../../DatabaseModels/Van/IVan";
 import VanRepository from './VanRepository';
-import {Model} from "mongoose";
 import IUnityOfWorks from "./IUnityOfWork";
 
 
 
 export default class UnityOfWork implements IUnityOfWorks{
-    constructor(
-        private readonly _van : Model<IVan>
-        
-        ){}
 
-
-    private vanRepository = new VanRepository(this._van);
+    private vanRepository = new VanRepository();
 
     getVanByRegistrationNumber(registrationNumber : string){
         return this.vanRepository.getVanByRegistrationNumber(registrationNumber);
