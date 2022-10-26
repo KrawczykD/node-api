@@ -6,12 +6,8 @@ import IUnityOfWorks from "./IUnityOfWork";
 
 
 export default class UnityOfWork implements IUnityOfWorks{
-    constructor(
-        private readonly _driver : Model<IDriver>
-        
-        ){}
-
-        private driverRepository = new DriverRepository(this._driver);
+ 
+    private driverRepository = new DriverRepository();
 
     getDriverByName(name : string){
         return this.driverRepository.getDriverByName(name);
